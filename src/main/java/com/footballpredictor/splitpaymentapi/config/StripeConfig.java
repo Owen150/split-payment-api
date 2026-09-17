@@ -1,5 +1,4 @@
 package com.footballpredictor.splitpaymentapi.config;
-
 import com.stripe.Stripe;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
