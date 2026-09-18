@@ -1,5 +1,4 @@
 package com.footballpredictor.splitpaymentapi.repository;
-
 import com.footballpredictor.splitpaymentapi.entity.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
