@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SellerService {
-
+    // This method creates a Stripe account for the given seller and returns the account ID.
     public String createStripeAccount(
             Seller seller
     ) throws StripeException {
