@@ -1,5 +1,4 @@
 package com.footballpredictor.splitpaymentapi.controller;
-
 import com.footballpredictor.splitpaymentapi.dto.CheckoutResponse;
 import com.footballpredictor.splitpaymentapi.dto.CreateCheckoutRequest;
 import com.footballpredictor.splitpaymentapi.service.StripePaymentService;
@@ -13,7 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/payments")
 public class PaymentController {
 
-    private StripePaymentService paymentService;
+    private final StripePaymentService paymentService;
+
+    public PaymentController(StripePaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
 
     @PostMapping("/checkout")
     public CheckoutResponse checkout(

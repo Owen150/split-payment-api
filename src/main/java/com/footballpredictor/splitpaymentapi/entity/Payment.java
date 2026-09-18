@@ -1,8 +1,12 @@
 package com.footballpredictor.splitpaymentapi.entity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "payments")
 public class Payment {
@@ -33,5 +37,4 @@ public class Payment {
 
     private Instant createdAt;
 
-    // Getters and Setters - lombok will generate them automatically
 }

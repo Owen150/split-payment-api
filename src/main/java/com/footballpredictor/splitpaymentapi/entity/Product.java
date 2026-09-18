@@ -23,5 +23,4 @@ public class Product {
     @JoinColumn(name = "seller_id")
     private Seller seller;
 
-    // Getters and Setters - lombok will generate them automatically
 }

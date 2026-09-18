@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/sellers")
 public class SellerController {
 
-    private SellerService sellerService;
+    private final SellerService sellerService;
+
+    public SellerController(SellerService sellerService) {
+        this.sellerService = sellerService;
+    }
 
     @PostMapping("/{id}/stripe/onboard")
     public SellerOnboardingResponse onboard(

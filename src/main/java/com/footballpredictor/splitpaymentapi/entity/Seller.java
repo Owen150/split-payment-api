@@ -22,5 +22,4 @@ public class Seller {
 
     private boolean stripeOnboardingComplete;
 
-    // Getters and Setters - lombok will generate them automatically
 }

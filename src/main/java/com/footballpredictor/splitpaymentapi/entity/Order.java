@@ -30,5 +30,4 @@ public class Order {
     private List<OrderItem> items =
             new ArrayList<>();
 
-    // Getters and Setters - lombok will generate them automatically
 }

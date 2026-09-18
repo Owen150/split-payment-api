@@ -27,5 +27,4 @@ public class OrderItem {
 
     private BigDecimal subtotal;
 
-    // Getters and Setters - lombok will generate them automatically
 }
