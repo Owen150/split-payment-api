@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/payments")
 public class PaymentController {
 
-    private final StripePaymentService paymentService;
+    private final StripePaymentService stripePaymentService;
 
-    public PaymentController(StripePaymentService paymentService) {
-        this.paymentService = paymentService;
+    public PaymentController(StripePaymentService stripePaymentService) {
+        this.stripePaymentService = stripePaymentService;
     }
 
     @PostMapping("/checkout")
-    public CheckoutResponse checkout(
+    public CheckoutResponse createCheckout(
             @RequestBody CreateCheckoutRequest request
     ) throws StripeException {
 
-        return paymentService
+        return stripePaymentService
                 .createCheckoutSession(
                         request.getOrderId()
                 );
