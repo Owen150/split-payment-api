@@ -36,7 +36,7 @@ public class StripePaymentService {
                                 )
                         );
 
-        // 1. Calculate amount on backend
+        // 1. Calculate amount on backend using the order details from the database
         BigDecimal total =
                 order.getTotalAmount();
 
@@ -59,21 +59,21 @@ public class StripePaymentService {
         }
 
         // 5. Convert to the smallest currency unit
-        long stripeAmount =
+        long amountInCents =
                 total
                         .multiply(
                                 BigDecimal.valueOf(100)
                         )
                         .longValueExact();
 
-        long stripeFee =
+        long feeInCents =
                 platformFee
                         .multiply(
                                 BigDecimal.valueOf(100)
                         )
                         .longValueExact();
 
-        // 6. Build line items
+        // 6. Create Stripe line items
         List<SessionCreateParams.LineItem>
                 lineItems = new ArrayList<>();
 
@@ -158,7 +158,7 @@ public class StripePaymentService {
                                         .builder()
 
                                         .setApplicationFeeAmount(
-                                                stripeFee
+                                                feeInCents
                                         )
 
                                         .setTransferData(

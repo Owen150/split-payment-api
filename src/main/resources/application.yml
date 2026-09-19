@@ -18,15 +18,12 @@ spring:
       hibernate:
         format_sql: true
 
-#  flyway:
-#    enabled: true
-
 server:
   port: 8080
 
 stripe:
-  secret-key: ${STRIPE_SECRET_KEY}
-  webhook-secret: ${STRIPE_WEBHOOK_SECRET}
+  secret-key: sk_test_xxxxxxxxx
+  webhook-secret: whsec_xxxxxxxxx
 
 management:
   endpoints:
