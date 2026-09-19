@@ -12,12 +12,13 @@ public class Seller {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String businessName;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "stripe_account_id")
+    @Column(name = "stripe_account_id", unique = true)
     private String stripeAccountId;
 
     private boolean stripeOnboardingComplete;

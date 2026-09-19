@@ -18,7 +18,8 @@ public class Order {
     @Column(nullable = false)
     private BigDecimal totalAmount;
 
-    private String currency = "kes";
+    @Column(nullable = false)
+    private String currency = "KES";
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
