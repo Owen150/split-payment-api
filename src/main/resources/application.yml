@@ -22,8 +22,8 @@ server:
   port: 8080
 
 stripe:
-  secret-key: sk_test_xxxxxxxxx
-  webhook-secret: whsec_xxxxxxxxx
+  secret-key: ${STRIPE_SECRET_KEY}
+  webhook-secret: ${STRIPE_WEBHOOK_SECRET}
 
 management:
   endpoints:
