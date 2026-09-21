@@ -1,5 +1,6 @@
 package com.footballpredictor.splitpaymentapi.controller;
 
+import com.footballpredictor.splitpaymentapi.service.PaymentService;
 import com.stripe.model.Event;
 import com.stripe.net.Webhook;
 import org.springframework.beans.factory.annotation.Value;
