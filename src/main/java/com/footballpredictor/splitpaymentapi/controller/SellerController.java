@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/sellers")
 public class SellerController {
-
     private final SellerService sellerService;
 
     public SellerController(SellerService sellerService) {
@@ -21,7 +20,6 @@ public class SellerController {
     public SellerOnboardingResponse onboard(
             @PathVariable Long id
     ) throws StripeException {
-
         return sellerService
                 .createOnboardingLink(id);
     }
