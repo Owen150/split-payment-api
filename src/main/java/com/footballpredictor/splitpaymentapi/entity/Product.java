@@ -43,12 +43,18 @@ public class Product {
             String name,
             String description,
             BigDecimal price,
-            Integer quantity
+            Integer quantity,
+            String imageUrl,
+            Seller seller,
+            Integer stock
     ) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
+        this.imageUrl = imageUrl;
+        this.seller = seller;
+        this.stock = stock;
     }
 }
