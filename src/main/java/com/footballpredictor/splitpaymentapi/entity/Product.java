@@ -19,11 +19,13 @@ public class Product {
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal price;
 
-    //private Integer stock;
+    @Column(nullable = false)
+    private Integer stock;
 
     @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
     private String imageUrl;
 
     @Column(nullable = false)
