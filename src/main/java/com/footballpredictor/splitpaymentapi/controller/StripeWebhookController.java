@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/stripe")
 public class StripeWebhookController {
-
     @Value("${stripe.webhook-secret}")
     private String webhookSecret;
 
