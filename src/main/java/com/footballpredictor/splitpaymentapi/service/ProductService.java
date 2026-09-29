@@ -34,12 +34,8 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    // UPDATE
-    public Product updateProduct(
-            Long id,
-            Product productDetails
-    ) {
-
+    // UPDATE Product
+    public Product updateProduct(Long id, Product productDetails) {
         Product product = productRepository
                 .findById(id)
                 .orElseThrow(() ->
@@ -47,31 +43,17 @@ public class ProductService {
                                 "Product not found with id: " + id
                         )
                 );
-
         product.setName(productDetails.getName());
-
-        product.setDescription(
-                productDetails.getDescription()
-        );
-        product.setPrice(
-                productDetails.getPrice()
-        );
-        product.setStock(
-                productDetails.getStock()
-        );
-        product.setImageUrl(
-                productDetails.getImageUrl()
-        );
-        product.setQuantity(
-                productDetails.getQuantity()
-        );
-        product.setSeller(
-                productDetails.getSeller()
-        );
+        product.setDescription(productDetails.getDescription());
+        product.setPrice(productDetails.getPrice());
+        product.setStock(productDetails.getStock());
+        product.setImageUrl(productDetails.getImageUrl());
+        product.setQuantity(productDetails.getQuantity());
+        product.setSeller(productDetails.getSeller());
         return productRepository.save(product);
     }
 
-    // DELETE
+    // DELETE Product
     public void deleteProduct(Long id) {
         if (!productRepository.existsById(id)) {
             throw new RuntimeException(
