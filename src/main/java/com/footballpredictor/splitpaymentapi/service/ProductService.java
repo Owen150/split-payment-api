@@ -8,21 +8,19 @@ import java.util.List;
 
 @Service
 public class ProductService {
-
     private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    // GET ALL
+    // GET ALL Products
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
-    // GET ONE
+    // GET ONE Product
     public Product getProductById(Long id) {
-
         return productRepository.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException(
@@ -31,9 +29,8 @@ public class ProductService {
                 );
     }
 
-    // CREATE
+    // CREATE Product
     public Product createProduct(Product product) {
-
         return productRepository.save(product);
     }
 
@@ -59,8 +56,17 @@ public class ProductService {
         product.setPrice(
                 productDetails.getPrice()
         );
+        product.setStock(
+                productDetails.getStock()
+        );
+        product.setImageUrl(
+                productDetails.getImageUrl()
+        );
         product.setQuantity(
                 productDetails.getQuantity()
+        );
+        product.setSeller(
+                productDetails.getSeller()
         );
         return productRepository.save(product);
     }

@@ -12,58 +12,49 @@ import java.util.List;
 @RequestMapping("/api/products")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ProductController {
+    // The primary function of this controller is to handle HTTP requests related to products, such as retrieving all products, retrieving a specific product by ID, creating a new product, updating an existing product, and deleting a product.
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
-    // GET ALL
+    // GET ALL Products
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
-        return ResponseEntity.ok(
-                productService.getAllProducts()
-        );
+        return ResponseEntity.ok(productService.getAllProducts());
     }
 
-    // GET ONE
+    // GET ONE Product
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(
             @PathVariable Long id
     ) {
-        return ResponseEntity.ok(
-                productService.getProductById(id)
-        );
+        return ResponseEntity.ok(productService.getProductById(id));
     }
 
-    // CREATE
+    // CREATE Product
     @PostMapping
     public ResponseEntity<Product> createProduct(
             @RequestBody Product product
     ) {
-        Product createdProduct =
-                productService.createProduct(product);
-
+        Product createdProduct = productService.createProduct(product);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(createdProduct);
     }
 
-    // UPDATE
+    // UPDATE Product
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(
             @PathVariable Long id,
             @RequestBody Product product
     ) {
-        Product updatedProduct =
-                productService.updateProduct(
-                        id,
-                        product
-                );
+        Product updatedProduct = productService.updateProduct(id, product);
         return ResponseEntity.ok(updatedProduct);
     }
 
-    // DELETE
+    // DELETE Product
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(
             @PathVariable Long id
