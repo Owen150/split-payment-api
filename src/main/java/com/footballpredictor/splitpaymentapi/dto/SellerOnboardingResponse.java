@@ -6,8 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class SellerOnboardingResponse {
-
     private String stripeAccountId;
-
     private String onboardingUrl;
 }

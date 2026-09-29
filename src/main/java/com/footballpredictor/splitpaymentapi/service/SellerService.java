@@ -10,15 +10,20 @@ import com.stripe.param.AccountCreateParams;
 import com.stripe.param.AccountLinkCreateParams;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SellerService {
-
     private final SellerRepository sellerRepository;
 
     public SellerService(
             SellerRepository sellerRepository
     ) {
         this.sellerRepository = sellerRepository;
+    }
+
+    public List<Seller> getAllSellers() {
+        return sellerRepository.findAll();
     }
 
     public SellerOnboardingResponse createOnboardingLink(
@@ -36,62 +41,32 @@ public class SellerService {
                         );
 
         // 2. Create Stripe Express account
-        if (seller.getStripeAccountId() == null) {
-
+        if (seller.getStripeAccountId() == null || seller.getStripeAccountId().isBlank()) {
             AccountCreateParams accountParams =
                     AccountCreateParams.builder()
-
-                            .setType(
-                                    AccountCreateParams.Type.EXPRESS
-                            )
-
+                            .setType(AccountCreateParams.Type.EXPRESS)
                             .setCountry("KE")
-
-                            .setEmail(
-                                    seller.getEmail()
-                            )
-
+                            .setEmail(seller.getEmail())
                             .build();
 
-            Account account =
-                    Account.create(accountParams);
+            Account account = Account.create(accountParams);
 
             // 3. Save Stripe account ID
-            seller.setStripeAccountId(
-                    account.getId()
-            );
-
-            seller.setStripeOnboardingComplete(
-                    false
-            );
-
+            seller.setStripeAccountId(account.getId());
+            seller.setStripeOnboardingComplete(false);
             sellerRepository.save(seller);
         }
 
         // 4. Create Stripe onboarding link
         AccountLinkCreateParams linkParams =
                 AccountLinkCreateParams.builder()
-
-                        .setAccount(
-                                seller.getStripeAccountId()
-                        )
-
-                        .setRefreshUrl(
-                                "http://localhost:4200/seller/stripe/refresh"
-                        )
-
-                        .setReturnUrl(
-                                "http://localhost:4200/seller/stripe/return"
-                        )
-
-                        .setType(
-                                AccountLinkCreateParams.Type.ACCOUNT_ONBOARDING
-                        )
-
+                        .setAccount(seller.getStripeAccountId())
+                        .setRefreshUrl("http://localhost:4200/seller/stripe/refresh")
+                        .setReturnUrl("http://localhost:4200/seller/stripe/return")
+                        .setType(AccountLinkCreateParams.Type.ACCOUNT_ONBOARDING)
                         .build();
 
-        AccountLink accountLink =
-                AccountLink.create(linkParams);
+        AccountLink accountLink = AccountLink.create(linkParams);
 
         // 5. Return onboarding URL
         return new SellerOnboardingResponse(
