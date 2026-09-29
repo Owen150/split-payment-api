@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// Service class for handling product-related operations
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
@@ -21,12 +22,7 @@ public class ProductService {
 
     // GET ONE Product
     public Product getProductById(Long id) {
-        return productRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException(
-                                "Product not found with id: " + id
-                        )
-                );
+        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
     }
 
     // CREATE Product
@@ -36,13 +32,7 @@ public class ProductService {
 
     // UPDATE Product
     public Product updateProduct(Long id, Product productDetails) {
-        Product product = productRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException(
-                                "Product not found with id: " + id
-                        )
-                );
+        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
         product.setName(productDetails.getName());
         product.setDescription(productDetails.getDescription());
         product.setPrice(productDetails.getPrice());
@@ -56,9 +46,7 @@ public class ProductService {
     // DELETE Product
     public void deleteProduct(Long id) {
         if (!productRepository.existsById(id)) {
-            throw new RuntimeException(
-                    "Product not found with id: " + id
-            );
+            throw new RuntimeException("Product not found");
         }
         productRepository.deleteById(id);
     }

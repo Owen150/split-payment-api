@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/payments")
 public class PaymentController {
-
     private final StripePaymentService stripePaymentService;
 
     public PaymentController(StripePaymentService stripePaymentService) {
@@ -22,7 +21,6 @@ public class PaymentController {
     public CheckoutResponse createCheckout(
             @RequestBody CreateCheckoutRequest request
     ) throws StripeException {
-
         return stripePaymentService
                 .createCheckoutSession(
                         request.getOrderId()
