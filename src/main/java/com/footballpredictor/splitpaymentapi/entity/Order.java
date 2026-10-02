@@ -1,4 +1,5 @@
 package com.footballpredictor.splitpaymentapi.entity;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,4 +27,20 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
+
+    public Order() {}
+
+    public Order(
+            Long id,
+            BigDecimal totalAmount,
+            String currency,
+            OrderStatus status,
+            List<OrderItem> items
+    ) {
+        this.id = id;
+        this.totalAmount = totalAmount;
+        this.currency = currency;
+        this.status = status;
+        this.items = items;
+    }
 }
