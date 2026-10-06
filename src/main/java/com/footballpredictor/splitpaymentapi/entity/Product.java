@@ -23,18 +23,20 @@ public class Product {
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal price;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Integer rating;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Integer reviewCount;
 
     @Column(nullable = false)
     private String imageUrl;
 
     // Check usage - Available/Remaining Stock
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Integer stock;
+
+    private Boolean inStock;
 
     // The selected Product/OrderItem quantity in every prospective order.
     // The selected quantity of an OrderItem inside an Order in short, which, in other words, represents the total number/quantity of a selected Product inside an Order.
@@ -43,15 +45,12 @@ public class Product {
     private Integer quantity;
 
     // Set the default value to be false. If the value of stock < or == 0, the value of inStock = false. If the value of stock is > 0, the value of inStock = true
-    @Column(nullable = false)
-    private boolean inStock;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id", nullable = false)
     private Seller seller;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     public Product() {}

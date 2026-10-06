@@ -27,7 +27,10 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public Category updateCategory(Category category) {
+    public Category updateCategory(Long id, Category categoryDetails) {
+        Category category = getCategoryById(id);
+        category.setName(categoryDetails.getName());
+        category.setDescription(categoryDetails.getDescription());
         return categoryRepository.save(category);
     }
 
