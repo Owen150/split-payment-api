@@ -1,7 +1,12 @@
 package com.footballpredictor.splitpaymentapi.service;
 
+import com.footballpredictor.splitpaymentapi.dto.CreateProductRequest;
+import com.footballpredictor.splitpaymentapi.entity.Category;
 import com.footballpredictor.splitpaymentapi.entity.Product;
+import com.footballpredictor.splitpaymentapi.entity.Seller;
+import com.footballpredictor.splitpaymentapi.repository.CategoryRepository;
 import com.footballpredictor.splitpaymentapi.repository.ProductRepository;
+import com.footballpredictor.splitpaymentapi.repository.SellerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +15,13 @@ import java.util.List;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final SellerRepository sellerRepository;
+    private final CategoryRepository categoryRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, SellerRepository sellerRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.sellerRepository = sellerRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     // GET ALL Products
@@ -26,7 +35,80 @@ public class ProductService {
     }
 
     // CREATE Product
-    public Product createProduct(Product product) {
+//    public Product createProduct(Product product) {
+//        return productRepository.save(product);
+//    }
+
+    public Product createProduct(
+            CreateProductRequest request
+    ) {
+
+        // Find seller
+        Seller seller = sellerRepository
+                .findById(request.getSellerId())
+                .orElseThrow(
+                        () -> new RuntimeException(
+                                "Seller not found with ID: "
+                                        + request.getSellerId()
+                        )
+                );
+
+
+        // Find category
+        Category category = categoryRepository
+                .findById(request.getCategoryId())
+                .orElseThrow(
+                        () -> new RuntimeException(
+                                "Category not found with ID: "
+                                        + request.getCategoryId()
+                        )
+                );
+
+
+        // Create Product
+        Product product = new Product();
+
+        product.setName(request.getName());
+
+        product.setDescription(
+                request.getDescription()
+        );
+
+        product.setPrice(
+                request.getPrice()
+        );
+
+        product.setQuantity(
+                request.getQuantity()
+        );
+
+        product.setImageUrl(
+                request.getImageUrl()
+        );
+
+        product.setStock(
+                request.getStock()
+        );
+
+        product.setInStock(
+                request.getInStock()
+        );
+
+        product.setRating(
+                request.getRating()
+        );
+
+        product.setReviewCount(
+                request.getReviewCount()
+        );
+
+        // THIS IS THE IMPORTANT PART
+        product.setSeller(seller);
+
+        // THIS IS THE IMPORTANT PART
+        product.setCategory(category);
+
+
         return productRepository.save(product);
     }
 

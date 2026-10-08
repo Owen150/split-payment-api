@@ -1,5 +1,6 @@
 package com.footballpredictor.splitpaymentapi.controller;
 
+import com.footballpredictor.splitpaymentapi.dto.CreateProductRequest;
 import com.footballpredictor.splitpaymentapi.entity.Product;
 import com.footballpredictor.splitpaymentapi.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -32,9 +33,30 @@ public class ProductController {
     }
 
     // CREATE Product
+//    @PostMapping
+//    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+//        Product createdProduct = productService.createProduct(product);
+//        return ResponseEntity
+//                .status(HttpStatus.CREATED)
+//                .body(createdProduct);
+//    }
+
+//    @PostMapping
+//    public ResponseEntity<Product> createProduct(
+//            @RequestBody CreateProductRequest request
+//    ) {
+//        return ResponseEntity.ok(
+//                productService.createProduct(request)
+//        );
+//    }
+
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        Product createdProduct = productService.createProduct(product);
+    public ResponseEntity<Product> createProduct(
+            @RequestBody CreateProductRequest request
+    ) {
+        Product createdProduct =
+                productService.createProduct(request);
+
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(createdProduct);
